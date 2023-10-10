@@ -1,14 +1,15 @@
 const { readFileSync, writeFileSync } = require("fs");
 
 console.log("start");
-const first = readFileSync("./temporary/first.txt");
-const second = readFileSync("./temporary/second.txt");
 
 writeFileSync(
   "./temporary/fileA.txt",
-  `Adding content to the files : ${first}, ${second}`,
+  "Adding Line 1\nAdding Line 2\nAdding Line 3",
   { flag: "a" }
 );
 
+const result = readFileSync("./temporary/fileA.txt", "utf8");
+
+console.log(result);
 console.log("done with this task");
 console.log("starting the next one");

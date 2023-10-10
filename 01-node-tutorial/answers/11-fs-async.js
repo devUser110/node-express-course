@@ -1,29 +1,38 @@
-const { readFile, writeFile } = require("fs");
+const { writeFile } = require("fs");
 
-console.log("start");
-readFile("./temporary/first.txt", "utf8", (err, result) => {
+console.log("at start");
+
+writeFile("./temporary/fileB.txt", "Adding Line 1\n", (err) => {
+  console.log("at point 1");
   if (err) {
-    console.log("Error reading first file", err);
-    return;
-  }
-  const first = result;
-  readFile("./temporary/second.txt", "utf8", (err, result) => {
-    if (err) {
-      console.log("Error reading second file", err);
-      return;
-    }
-    const second = result;
+    console.log("Error at point 1: ", err);
+  } else {
     writeFile(
       "./temporary/fileB.txt",
-      `Writing the ${first} and ${second} files together`,
-      (err, result) => {
-        if (("Error writing fileB", err)) {
-          console.log(err);
-          return;
+      "Adding Line 2\n",
+      { flag: "a" },
+      (err) => {
+        console.log("at point 2");
+        if (err) {
+          console.log("Error at point 2: ", err);
+        } else {
+          writeFile(
+            "./temporary/fileB.txt",
+            "Adding Line 3\n",
+            { flag: "a" },
+            (err) => {
+              console.log("at point 3");
+              if (err) {
+                console.log("Error at point 3: ", err);
+              } else {
+                console.log("All lines added.");
+              }
+            }
+          );
         }
-        console.log("successfully merged files");
       }
     );
-  });
+  }
 });
-console.log("starting the next task");
+
+console.log("at end");
