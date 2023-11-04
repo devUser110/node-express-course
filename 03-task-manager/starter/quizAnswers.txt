@@ -1,0 +1,20 @@
+1. Quickly explain how middleware is used in an Express application.
+
+    Middleware is a series of functions that are executed in order as part of the request-response cycle and it can perform various tasks, such as processing data, authentication, logging, and error handling.
+
+2. What does CRUD stand for?
+
+    CRUD is - Create, Read, Update, Destroy.
+    
+3. You are careful to store your sensitive information in a .env file.
+    1. How do you get your app to access the information in the .env file?
+
+        First npm install dotenv. dotenv loads the environment variables created in the .env file
+
+        In this lesson the environment variable is called MONGO_URI, which stores sensitive information to connect to MongoDB.
+
+        require("dotenv").config() in app.js and create an async function to connect to MongoDB. In this lesson the try block attempts to connect and if successful, the message along with the port number is logged to the console. If unsuccessful, the catch block logs the error to the console.
+
+    2. How do you protect the contents of the .env file so that it is not stored in your Github repository?
+
+        To protect the contents of the .env file you create a .gitignore file and add .env to the .gitignore file.
